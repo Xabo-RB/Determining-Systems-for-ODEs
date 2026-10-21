@@ -41,13 +41,20 @@ transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
 | New variables depend on the inputs | no                         | yes                        | no              | yes                               |
 | Output must be preserved           | yes                        | yes                        | yes             | no                                |
 
-- Each new variable is an unknown function. For example, the new state `X1` is `X1(t, x)` with
-  `SI` and `X1(t, x, u)` with `SI_timeT_udep`. The equations contain its partial derivatives:
+Abbreviations: **SI** structural identifiability, **Obs.** observability, **Trans.** transformed,
+**Unch.** unchanged (`T = t`, `P = p` or `U = u`), **-** no particular property (`General` gives
+the symmetries of the state equations alone, without the output).
+
+- Each new transformed variable is an unknown function. For example, the new state `X1` is `X1(t, x)` with
+  `SI` and `X1(t, x, u)` with `SI_timeT_Udep`. The equations contain its partial derivatives:
   `X1t`, `X1x1`, `X1x2`, ... and also `X1u` if it depends on the inputs. No derivatives with
   respect to the parameters appear, because the parameters do not change with time.
 - Transformed parameters must stay constant along the solutions.
-- When the new variables do not depend on the inputs, the equations are also split with respect
-  to the powers of `u` (they are always split with respect to `u_t`).
+- The coefficients file comes from splitting the equations. If an equation is a polynomial in a
+  variable that the unknowns do not depend on, it must hold for every value of that variable, so
+  each coefficient must vanish separately: `A + B*u = 0` for every `u`, with `A` and `B` free of
+  `u`, gives `A = 0` and `B = 0`. This is always done with the input derivatives `u_t`, and also
+  with the inputs `u` when the new variables do not depend on them (`SI`, `Obs`).
 - In the infinitesimal system, a variable that is not transformed has a zero component in the
   generator: `tau = 0` if `T = t`, `zeta = 0` if `P = p`, `eta = 0` if `U = u`.
 
