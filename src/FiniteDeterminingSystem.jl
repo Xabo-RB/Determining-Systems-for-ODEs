@@ -30,9 +30,6 @@
 #
 # Splitting: always w.r.t. u_t; w.r.t. powers of u ONLY if input_dependence = false.
 # For rational models, clear denominators before splitting (e.g. numer(normal(.)) in Maple).
-#
-# Cross-check in Python: scripts/reference_detsys.py (same equations, same names).
-# Self-test in Julia:    scripts/TestFiniteDetSys.jl
 #__________________________________________________________________________________________
 
 using Symbolics
