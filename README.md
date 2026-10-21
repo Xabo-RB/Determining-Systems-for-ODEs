@@ -1,7 +1,6 @@
-# Symmetries in Julia (v4, without DrWatson)
+# Calculus of the determining systems for ODEs
 
-Builds the determining system (finite or infinitesimal) of the symmetries of an ODE model with
-outputs, using the full chain rule (see `../FIX_NOTES.md`). You only need Julia (1.10 or newer).
+Builds the determining system (finite or infinitesimal) of the symmetries of an ODE model with outputs. Its needed Julia (1.10 or newer).
 
 ## How to run it
 
@@ -24,15 +23,32 @@ The infinitesimal system adds the prefix `infinitesimal_` to both files.
 
 ## Methods
 
-| `METHOD` | What is transformed | Old option (finite / infinitesimal) |
-|---|---|---|
-| `SI` | states and parameters, `T = t` (ECC setting) | 5 / 4 |
-| `SI_timeT_udep` | as `SI`, plus time; the unknowns may depend on the inputs | 6 / 5 |
-| `Obs` | states only, parameters fixed, `T = t` | 7 / 3 |
-| `General` | time, states and inputs, no output (draft, Section 2) | 8 / 6 |
+The determining system gives the conditions for a change of variables
 
-The old options 1-4 (finite) and 1-2 (infinitesimal) are not here: they use only the diagonal of
-the Jacobian (see `../FIX_NOTES.md`). They are still in `../v3/`.
+    (t, x, p, u)  ->  (T, X, P, U)        time, states, parameters, inputs
+
+to be a symmetry of the model: it maps solutions of the model to solutions and, when the
+output is included, leaves the output unchanged. `METHOD` chooses which variables are
+transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
+
+|                                    | `SI`                       | `SI_timeT_udep`            | `Obs`           | `General`                         |
+|------------------------------------|----------------------------|----------------------------|-----------------|-----------------------------------|
+| Use it to study                    | structural identifiability | structural identifiability | observability   | symmetries of the state equations |
+| Time                               | unchanged                  | transformed                | unchanged       | transformed                       |
+| States                             | transformed                | transformed                | transformed     | transformed                       |
+| Parameters                         | transformed                | transformed                | unchanged       | unchanged                         |
+| Inputs                             | unchanged                  | unchanged                  | unchanged       | transformed                       |
+| New variables depend on the inputs | no                         | yes                        | no              | yes                               |
+| Output must be preserved           | yes                        | yes                        | yes             | no                                |
+
+- The new variables are unknown functions of `t` and `x`, and also of `u` when the table says
+  so. They may depend on `p` too; this adds no terms because the parameters are constant.
+- Transformed parameters must stay constant along the solutions.
+- When the new variables do not depend on the inputs, the equations are also split with respect
+  to the powers of `u` (they are always split with respect to `u_t`).
+- In the infinitesimal system, a variable that is not transformed has a zero component in the
+  generator: `tau = 0` if `T = t`, `zeta = 0` if `P = p`, `eta = 0` if `U = u`.
+
 
 ## How to write a model
 
@@ -50,13 +66,6 @@ One file per model in `Models/`. For example, `Models/DAISY_EX3.jl`:
         "x1"                              # the outputs go last
     ]
 
-## How to check that it works
-
-    julia scripts/TestFiniteDetSys.jl
-
-The expected output is listed at the top of that file. There is also a cross-check in Python
-(it needs `sympy`): `python scripts/reference_detsys.py`, which writes `Results/reference_*`.
-
 ## Contents
 
     run.jl                           runs a model
@@ -64,6 +73,4 @@ The expected output is listed at the top of that file. There is also a cross-che
     Results/                         result files
     src/FiniteDeterminingSystem.jl   builds, splits and writes the determining systems
     src/loadModel.jl                 reads a model file
-    scripts/TestFiniteDetSys.jl      self-test
-    scripts/reference_detsys.py      the same equations in Python (SymPy)
     Project.toml, Manifest.toml      packages and their exact versions
