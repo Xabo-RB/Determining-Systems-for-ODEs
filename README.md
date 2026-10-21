@@ -33,7 +33,7 @@ transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
 
 |                                    | `SI`                       | `SI_timeT_udep`            | `Obs`           | `General`                         |
 |------------------------------------|----------------------------|----------------------------|-----------------|-----------------------------------|
-| Use it to study                    | structural identifiability | structural identifiability | observability   | symmetries of the state equations |
+| Use it to study                    | SI | SI | Obs.   | - |
 | Time                               | Unch.                  | Trans.                | Unch.       | Trans.                       |
 | States                             | Trans.                | Trans.                | Trans.     | Trans.                       |
 | Parameters                         | Trans.                | Trans.                | Unch.       | Unch.                         |
@@ -41,8 +41,10 @@ transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
 | New variables depend on the inputs | no                         | yes                        | no              | yes                               |
 | Output must be preserved           | yes                        | yes                        | yes             | no                                |
 
-- The new variables are unknown functions of `t` and `x`, and also of `u` when the table says
-  so. They may depend on `p` too; this adds no terms because the parameters are constant.
+- Each new variable is an unknown function. For example, the new state `X1` is `X1(t, x)` with
+  `SI` and `X1(t, x, u)` with `SI_timeT_udep`. The equations contain its partial derivatives:
+  `X1t`, `X1x1`, `X1x2`, ... and also `X1u` if it depends on the inputs. No derivatives with
+  respect to the parameters appear, because the parameters do not change with time.
 - Transformed parameters must stay constant along the solutions.
 - When the new variables do not depend on the inputs, the equations are also split with respect
   to the powers of `u` (they are always split with respect to `u_t`).
