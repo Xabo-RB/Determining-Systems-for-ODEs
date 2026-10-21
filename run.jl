@@ -1,18 +1,18 @@
-# Determining systems of the symmetries of a model (full chain rule). See README.md.
+# Determining systems of the symmetries of a model. See README.md.
 #
 # From a terminal, in this folder:
 #     julia run.jl Models/DAISY_EX3.jl SI
 #     julia run.jl Models/DAISY_EX3.jl SI infinitesimal
 # From VS Code: change the three settings below and run this file.
 
-MODEL         = "Models/DAISY_EX3.jl"
-METHOD        = "SI"     # SI, SI_timeT_udep, Obs or General
+MODEL = "Models/SEIR.jl"
+METHOD = "SI"     # SI, SI_timeT_udep, Obs or General
 INFINITESIMAL = false    # false: finite determining system; true: infinitesimal
 
 #__________________________________________________________________________________________
 
 import Pkg
-Pkg.activate(@__DIR__; io = devnull)   # packages of this folder (Project.toml)
+Pkg.activate(@__DIR__; io=devnull)   # packages of this folder (Project.toml)
 Pkg.instantiate()                      # installs them the first time
 
 using Symbolics
@@ -29,11 +29,11 @@ end
 
 # Options of finiteDeterminingSystem / infinitesimalDeterminingSystem for each method
 METHODS = Dict(
-    "SI"            => (time_transform = false, input_dependence = false, transform_params = true),
-    "SI_timeT_udep" => (time_transform = true,  input_dependence = true,  transform_params = true),
-    "Obs"           => (time_transform = false, input_dependence = false, transform_params = false),
-    "General"       => (time_transform = true,  input_dependence = true,  transform_params = false,
-                        transform_inputs = true, include_output = false),
+    "SI" => (time_transform=false, input_dependence=false, transform_params=true),
+    "SI_timeT_udep" => (time_transform=true, input_dependence=true, transform_params=true),
+    "Obs" => (time_transform=false, input_dependence=false, transform_params=false),
+    "General" => (time_transform=true, input_dependence=true, transform_params=false,
+        transform_inputs=true, include_output=false),
 )
 haskey(METHODS, METHOD) || error("Unknown method \"$(METHOD)\". Use SI, SI_timeT_udep, Obs or General.")
 
@@ -44,5 +44,5 @@ name, model = loadModel(modelPath)
 resultsDir = joinpath(@__DIR__, "Results")
 mkpath(resultsDir)
 cd(resultsDir) do
-    runDeterminingSystem(model, name, METHOD; infinitesimal = INFINITESIMAL, METHODS[METHOD]...)
+    runDeterminingSystem(model, name, METHOD; infinitesimal=INFINITESIMAL, METHODS[METHOD]...)
 end
