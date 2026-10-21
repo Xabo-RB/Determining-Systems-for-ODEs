@@ -1,0 +1,33 @@
+#__________________________________________________________________________________________
+# ------------- FINITE AND INFINITESIMAL DETERMINING SYSTEMS -------------
+#
+# Total derivative along solutions of an unknown function F:
+#
+#     D(F) = F_t + sum_j F_{x_j} * f_j(t,x,u,p) + sum_k F_{u_k} * u_k_t
+#
+# (terms F_p * dp/dt vanish because dp/dt = 0). This is eq. (2b)/(20b) of the draft written in
+# components: X_x * xdot is a Jacobian MATRIX times a vector, T_x . xdot a dot product.
+#
+# FINITE system, unknowns T, X_i, P_k, U_k (names as in the rest of the repo: X1, X1t, X1x2,
+# X1u, T, Tt, Tx1, Tu, P1, P1t, P1x2, U, u_t):
+#     states     : f_i(T, X, U, P) * D(T) - D(X_i) = 0      (D(T) = 1 when T = t)
+#     parameters : D(P_k) = 0
+#     outputs    : h_l(X, u, P) - h_l(x, u, p) = 0
+#
+# INFINITESIMAL system, V = tau d_t + xi.d_x + zeta.d_p + eta.d_u (unknown names: tau, xi_x1,
+# zeta_p1, eta_u and derivatives tau_t, tau_x1, xi_x1_t, xi_x1_x2, xi_x1_u, zeta_p1_x2, ...):
+#     states     : D(xi_i) - f_i D(tau) - V(f_i) = 0
+#     parameters : D(zeta_k) = 0
+#     outputs    : V(h_l) = 0
+# with V(g) = tau g_t + sum_j xi_j g_{x_j} + sum_k zeta_k g_{p_k} + sum_k eta_k g_{u_k}.
+#
+# Options (same for both systems)
+#     time_transform   : T (or tau) is an unknown instead of T = t (tau = 0)
+#     input_dependence : the unknowns may depend on the inputs (adds F_u * u_t terms)
+#     transform_params : parameters are transformed (identifiability); false = observability
+#     transform_inputs : inputs are transformed, U(t,x,u) (general transformation, draft Sect. 2)
+#     include_output   : add the output condition (false = symmetries of the state eq. only)
+#
+# Splitting: always w.r.t. u_t; w.r.t. powers of u ONLY if input_dependence = false.
+# For rational models, clear denominators before splitting (e.g. numer(normal(.)) in Maple).
+#__________________________________________________________________________________________

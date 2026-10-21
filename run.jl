@@ -20,7 +20,7 @@ using SymbolicUtils
 include(joinpath(@__DIR__, "src", "FiniteDeterminingSystem.jl"))
 include(joinpath(@__DIR__, "src", "loadModel.jl"))
 
-# Command-line arguments replace the settings above
+# CFor replacing the settings above
 if !isempty(ARGS)
     MODEL = ARGS[1]
     METHOD = length(ARGS) >= 2 ? ARGS[2] : "SI"
