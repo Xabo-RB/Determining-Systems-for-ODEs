@@ -34,10 +34,10 @@ transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
 |                                    | `SI`                       | `SI_timeT_udep`            | `Obs`           | `General`                         |
 |------------------------------------|----------------------------|----------------------------|-----------------|-----------------------------------|
 | Use it to study                    | structural identifiability | structural identifiability | observability   | symmetries of the state equations |
-| Time                               | unchanged                  | transformed                | unchanged       | transformed                       |
-| States                             | transformed                | transformed                | transformed     | transformed                       |
-| Parameters                         | transformed                | transformed                | unchanged       | unchanged                         |
-| Inputs                             | unchanged                  | unchanged                  | unchanged       | transformed                       |
+| Time                               | Unch.                  | Trans.                | Unch.       | Trans.                       |
+| States                             | Trans.                | Trans.                | Trans.     | Trans.                       |
+| Parameters                         | Trans.                | Trans.                | Unch.       | Unch.                         |
+| Inputs                             | Unch.                  | Unch.                  | Unch.       | Trans.                       |
 | New variables depend on the inputs | no                         | yes                        | no              | yes                               |
 | Output must be preserved           | yes                        | yes                        | yes             | no                                |
 
