@@ -33,7 +33,7 @@ transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
 
 |                                    | `SI`                       | `SI_timeT_udep`            | `Obs`           | `General`                         |
 |------------------------------------|----------------------------|----------------------------|-----------------|-----------------------------------|
-| Use it to study                    | SI | SI | Obs.   | - |
+| Use it to study                    | SI | SI | Obs.   | Draft Section 2 |
 | Time                               | Unch.                  | Trans.                | Unch.       | Trans.                       |
 | States                             | Trans.                | Trans.                | Trans.     | Trans.                       |
 | Parameters                         | Trans.                | Trans.                | Unch.       | Unch.                         |
@@ -42,8 +42,7 @@ transformed; the others stay as they are (`T = t`, `P = p` or `U = u`).
 | Output must be preserved           | yes                        | yes                        | yes             | no                                |
 
 Abbreviations: **SI** structural identifiability, **Obs.** observability, **Trans.** transformed,
-**Unch.** unchanged (`T = t`, `P = p` or `U = u`), **-** no particular property (`General` gives
-the symmetries of the state equations alone, without the output).
+**Unch.** unchanged (`T = t`, `P = p` or `U = u`).
 
 - Each new transformed variable is an unknown function. For example, the new state `X1` is `X1(t, x)` with
   `SI` and `X1(t, x, u)` with `SI_timeT_Udep`. The equations contain its partial derivatives:
