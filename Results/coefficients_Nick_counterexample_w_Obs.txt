@@ -1,0 +1,5 @@
+1 - Xt - Xx
+X - Xw - Xx*x
+-Wt - Wx
+1 - Ww - Wx*x
+W - w

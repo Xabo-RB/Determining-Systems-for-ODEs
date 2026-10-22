@@ -1,0 +1,4 @@
+1 - Xt - Xx + X*u - Xw*u - Xx*u*x
+-Wt - Wx + u - Ww*u - Wx*u*x
+0
+W - w
