@@ -5,8 +5,8 @@
 #     julia run.jl Models/DAISY_EX3.jl SI infinitesimal
 # From VS Code: change the three settings below and run this file.
 
-MODEL = "Models/SEIR.jl"
-METHOD = "SI"     # SI, SI_timeT_udep, Obs or General
+MODEL = "Models/Nick_counterexample.jl"
+METHOD = "SI_timeT_udep"     # SI, SI_timeT_udep, Obs or General
 INFINITESIMAL = false    # false: finite determining system; true: infinitesimal
 
 #__________________________________________________________________________________________

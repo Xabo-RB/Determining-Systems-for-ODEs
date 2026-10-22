@@ -1,0 +1,2 @@
+Tt + Tx - Xt - Xx + Tt*X*u + Tx*X*u + Tx*u*x - Xx*u*x + Tx*X*(u^2)*x
+Tu - Xu + Tu*X*u
